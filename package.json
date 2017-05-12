@@ -1,0 +1,24 @@
+{
+  "name": "bamazon",
+  "version": "1.0.0",
+  "description": "",
+  "main": "customer.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thisiswhale/Bamazon.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/thisiswhale/Bamazon/issues"
+  },
+  "homepage": "https://github.com/thisiswhale/Bamazon#readme",
+  "dependencies": {
+    "columnify": "^1.5.4",
+    "inquirer": "^3.0.6",
+    "mysql": "^2.13.0"
+  }
+}
