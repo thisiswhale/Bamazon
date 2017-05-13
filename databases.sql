@@ -8,7 +8,7 @@ CREATE TABLE customer_db(
 	department_name VARCHAR(50),
 	price INTEGER(7),
 	stock_quantity INTEGER(7),
-	PRIMARY ID(item_id)
+	PRIMARY KEY(item_id)
 );
 
 INSERT INTO customer_db(product_name,department_name,price,stock_quantity) VALUES("Nintendo Switch","Electronics",300,5);
