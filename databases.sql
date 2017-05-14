@@ -2,6 +2,7 @@ CREATE DATABASE Bamazon;
 
 use Bamazon;
 
+-- bamazonCustomer
 CREATE TABLE customer_db(
 	item_id INTEGER(7) AUTO_INCREMENT NOT NULL,
 	product_name VARCHAR(50),

@@ -39,10 +39,13 @@ function printDB() {
         // console.log(columnify(database,{align: 'right', paddingChr: '.'}));
         //console.log(data[0].price);
         //console.log(database);
-
-        console.log("");
-        console.log(columnify(data, { align: 'right', paddingChr: '.' }));
-        console.log("");
+        if (data.length == 0) {
+            return console.log("Database not found.");
+        } else {
+            console.log("");
+            console.log(columnify(data, { align: 'right', paddingChr: '.' }));
+            console.log("");
+        }
     });
 }
 var inquirer = require('inquirer');
@@ -60,17 +63,17 @@ function makePurchase() {
         }]).then(function(user) {
 
             //must parse to Int from string data
-            var thisItemsStocks_pars = parseInt(data[user.itemIndexChosen-1].stock_quantity);
-            var thisItemsPrice_pars = parseInt(data[user.itemIndexChosen-1].price);
+            var thisItemsStocks_pars = parseInt(data[user.itemIndexChosen - 1].stock_quantity);
+            var thisItemsPrice_pars = parseInt(data[user.itemIndexChosen - 1].price);
             var quantityAmt_pars = parseInt(user.quantityAmt);
 
-             //If theres still in stock, then update database
+            //If theres still in stock, then update database
             if (thisItemsStocks_pars >= quantityAmt_pars) {
                 connection.query("UPDATE customer_db SET stock_quantity=? WHERE item_id=?", [(thisItemsStocks_pars - quantityAmt_pars), user.itemIndexChosen], function(err, res) {
                     if (err) throw err;
-                    console.log(data[user.itemIndexChosen-1].product_name +" : $" +thisItemsPrice_pars)
-                    console.log("Quantity: " +quantityAmt_pars)
-                    console.log("Total: $" +(thisItemsPrice_pars*quantityAmt_pars))
+                    console.log(data[user.itemIndexChosen - 1].product_name + " : $" + thisItemsPrice_pars)
+                    console.log("Quantity: " + quantityAmt_pars)
+                    console.log("Total: $" + (thisItemsPrice_pars * quantityAmt_pars))
                     console.log("... ... ...Transaction recieved.");
                     printDB();
                 })
@@ -84,11 +87,6 @@ function makePurchase() {
 }
 
 
-// Once the customer has placed the order, your application should check if your store has enough of the product to meet the customer's request.
-
-//     If not, the app should log a phrase like Insufficient quantity!, and then prevent the order from going through.
-
-// However, if your store does have enough of the product, you should fulfill the customer's order.
-
-//     This means updating the SQL database to reflect the remaining quantity.
-//     Once the update goes through, show the customer the total cost of their purchase.
+/*columns:
+item_id , product_name, department_name, price, stock_quantity
+*/
