@@ -22,3 +22,18 @@ INSERT INTO customer_db(product_name,department_name,price,stock_quantity) VALUE
 INSERT INTO customer_db(product_name,department_name,price,stock_quantity) VALUES("Are You My Java?","Books",10,52);
 INSERT INTO customer_db(product_name,department_name,price,stock_quantity) VALUES("GG EZ Pillz","Health",23,500);
 INSERT INTO customer_db(product_name,department_name,price,stock_quantity) VALUES("Coffee for Coders","Health",22,420);
+
+
+CREATE TABLE departments(
+	department_id INTEGER(7) AUTO_INCREMENT NOT NULL PRIMARY KEY,
+	department_name VARCHAR(50),
+	over_head_costs INTEGER(7),
+	total_sales INTEGER(7)
+)
+
+INSERT INTO departments(department_name,over_head_costs) VALUES("Electronics","5000");
+INSERT INTO departments(department_name,over_head_costs) VALUES("Video Games","4000");
+INSERT INTO departments(department_name,over_head_costs) VALUES("Appliances","1500");
+INSERT INTO departments(department_name,over_head_costs) VALUES("Books","200");
+INSERT INTO departments(department_name,over_head_costs) VALUES("Health","200");
+INSERT INTO departments(department_name,over_head_costs) VALUES("Kawaii","100");

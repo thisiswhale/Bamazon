@@ -25,16 +25,6 @@ connection.connect(function(err) {
 function printDB() {
     var columnify = require('columnify');
     connection.query("SELECT * FROM customer_db", function(err, data) {
-        // for(var i=0; i< data.length; i++){
-        // 	var row = {
-        // 		item_id: data[i].item_id,
-        // 		Product_Name: data[i].product_name,
-        // 		Category: data[i].department_name,
-        // 		Price: data[i].price,
-        // 		Stock_quantity: data[i].stock_quantity
-        // 	};
-        // 	database.push(row);
-        // }
         // console.log("");
         // console.log(columnify(database,{align: 'right', paddingChr: '.'}));
         //console.log(data[0].price);
@@ -62,30 +52,56 @@ function makePurchase() {
             name: "quantityAmt"
         }]).then(function(user) {
 
-            //must parse to Int from string data
-            var thisItemsStocks_pars = parseInt(data[user.itemIndexChosen - 1].stock_quantity);
-            var thisItemsPrice_pars = parseInt(data[user.itemIndexChosen - 1].price);
-            var quantityAmt_pars = parseInt(user.quantityAmt);
+            //CHECK Empty user BUG
+            if (user.itemIndexChosen === "" || user.quantityAmt === "") {
+                console.log("Search Unknown.");
+                return makePurchase();
+            } 
+            //Make TRANSACTION METHOD
+            else {
+                //must parse to Int from string data
+                var thisItemsStocks_pars = parseInt(data[user.itemIndexChosen - 1].stock_quantity);
+                var thisItemsPrice_pars = parseInt(data[user.itemIndexChosen - 1].price);
+                var quantityAmt_pars = parseInt(user.quantityAmt);
 
-            //If theres still in stock, then update database
-            if (thisItemsStocks_pars >= quantityAmt_pars) {
-                connection.query("UPDATE customer_db SET stock_quantity=? WHERE item_id=?", [(thisItemsStocks_pars - quantityAmt_pars), user.itemIndexChosen], function(err, res) {
-                    if (err) throw err;
-                    console.log(data[user.itemIndexChosen - 1].product_name + " : $" + thisItemsPrice_pars)
-                    console.log("Quantity: " + quantityAmt_pars)
-                    console.log("Total: $" + (thisItemsPrice_pars * quantityAmt_pars))
-                    console.log("... ... ...Transaction recieved.");
-                    printDB();
-                })
-            } else {
-                console.log("Insufficient Quantity");
-                console.log("");
-                makePurchase();
+                //If theres still in stock, then update database
+                if (thisItemsStocks_pars >= quantityAmt_pars) {
+                    connection.query("UPDATE customer_db SET stock_quantity=? WHERE item_id=?", [(thisItemsStocks_pars - quantityAmt_pars), user.itemIndexChosen], function(err, res) {
+                        if (err) throw err;
+                        var totalCost = thisItemsPrice_pars * quantityAmt_pars;
+                        console.log(data[user.itemIndexChosen - 1].product_name + " : $" + thisItemsPrice_pars)
+                        console.log("Quantity: " + quantityAmt_pars);
+                        console.log("Total: $" + totalCost);
+                        console.log("... ... ...Transaction recieved.");
+                        //recored purchase into revenue table
+                        logRevenue(totalCost, data[user.itemIndexChosen - 1].department_name);
+                        printDB();
+                        makePurchase();
+                    })
+                } else {
+                    console.log("Insufficient Quantity");
+                    console.log("");
+                    makePurchase();
+                }
             }
+
         });
     });
 }
 
+//revenue is INT, category is STR
+function logRevenue(revenue, category) {
+    connection.query("SELECT * FROM departments WHERE department_name=?", [category], function(err, data) {
+        connection.query("UPDATE departments SET? WHERE?", [{
+            total_sales: parseInt(data[0].total_sales) + revenue
+        }, {
+            department_name: category
+        }], function(err, res) {
+            console.log(res);
+            console.log("Revenue sucess");
+        });
+    });
+}
 
 /*columns:
 item_id , product_name, department_name, price, stock_quantity
