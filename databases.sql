@@ -31,9 +31,9 @@ CREATE TABLE departments(
 	total_sales INTEGER(7)
 )
 
-INSERT INTO departments(department_name,over_head_costs) VALUES("Electronics","5000");
-INSERT INTO departments(department_name,over_head_costs) VALUES("Video Games","4000");
-INSERT INTO departments(department_name,over_head_costs) VALUES("Appliances","1500");
-INSERT INTO departments(department_name,over_head_costs) VALUES("Books","200");
-INSERT INTO departments(department_name,over_head_costs) VALUES("Health","200");
-INSERT INTO departments(department_name,over_head_costs) VALUES("Kawaii","100");
+INSERT INTO departments(department_name,over_head_costs,total_sales) VALUES("Electronics","5000",0);
+INSERT INTO departments(department_name,over_head_costs,total_sales) VALUES("Video Games","4000",0);
+INSERT INTO departments(department_name,over_head_costs,total_sales) VALUES("Appliances","1500",0);
+INSERT INTO departments(department_name,over_head_costs,total_sales) VALUES("Books","200",0);
+INSERT INTO departments(department_name,over_head_costs,total_sales) VALUES("Health","200",0);
+INSERT INTO departments(department_name,over_head_costs,total_sales) VALUES("Kawaii","100",0);
