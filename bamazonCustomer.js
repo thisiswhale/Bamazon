@@ -97,8 +97,6 @@ function logRevenue(revenue, category) {
         }, {
             department_name: category
         }], function(err, res) {
-            console.log(res);
-            console.log("Revenue sucess");
         });
     });
 }

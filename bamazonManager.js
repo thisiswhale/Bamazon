@@ -87,7 +87,6 @@ function addInventory() {
     }]).then(function(user) {
 
         var selectorQuery = "'%" + user.productDBSearch + "%'";
-        console.log(selectorQuery);
         connection.query("SELECT * FROM customer_db WHERE product_name LIKE" + selectorQuery, function(err, data) {
             //CHECKS FOR EMPTY DATA, ELSE do stuff
             if (data.length === 0 || data.length === undefined) {
@@ -124,7 +123,6 @@ function addInventory() {
 }
 
 function addProduct() {
-    console.log("hello");
     inquirer.prompt([{
         message: "Name the product: ",
         name: "product"
