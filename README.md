@@ -1,13 +1,14 @@
 # Bamazon
 
 ## Overview
-Bamazon is a Amazon-like storefront using MySQL. The app takes orders from users and deplete stock from the store's inventory, track products sa;es avrouss the store's departments, and provide a summary of department's sales record. 
+Bamazon is a Amazon-like storefront using MySQL. The app takes orders from users and deplete stock from the store's inventory, track products saves across the store's departments, and provide a summary of department's sales record. 
 
-If you haven't written a markdown file yet, [click here for a rundown](https://guides.github.com/features/mastering-markdown/), or just take a look at the raw file of these instructions.
-
+#### Built with
+  - Node.js
+  - mySQL
 - - -
 
-### node bamazonCustomer.js
+### `node bamazonCustomer.js`
 1. Display sales inventory
 
 ![first image](images/customer1.jpg)
@@ -22,7 +23,7 @@ If you haven't written a markdown file yet, [click here for a rundown](https://g
 
 - - -
 
-### node bamazonManager.js
+### `node bamazonManager.js`
 - List a set of menu options:
 
   ![image](images/manager1.jpg)
@@ -36,16 +37,16 @@ If you haven't written a markdown file yet, [click here for a rundown](https://g
   ![image](images/manager3.jpg)
 
   * Add to Inventory: Stock more of any item in the store
-  
+
   ![image](images/manager4.jpg)
-  
+
   * Add New Product: Adds a new product to the store
 
   ![image](images/manager5.jpg)
 
 - - -
 
-### node bamazonSupervisor.js
+### `node bamazonSupervisor.js`
 - List of set menu options:
 
     ![image](images/supervisor1.jpg)
